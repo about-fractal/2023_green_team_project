@@ -15,9 +15,33 @@
 사용 할만한 api : 구글 맵핑 API , 공공 전국 병.의원 찾기 API 
 
 1. 환자 테이블
+환자 식별자 (Patient ID)
+환자 이름 (Patient Name)
+환자 생년월일 (Date of Birth)
+주소 (Address)
+전화번호 (Phone Number)
+주치의 ID (Attending Physician ID)
+진단 날짜 (Diagnosis Date)
+기타 환자 정보
+
 2. 의사 테이블
+의사 식별자 (Doctor ID)
+의사 이름 (Doctor Name)
+전문 분야 (Specialization)
+연락처 정보 (Contact Information)
 3. 병동 테이블
+병동 식별자 (Ward ID)
+병동 이름 (Ward Name)
+병동 설명 (Description)
+
 4. 병실 테이블 
+병실 식별자 (Room ID)
+병실 번호 (Room Number)
+병동 ID (Ward ID)
+병실 상태 (Occupancy Status 등)
+
+
+
 
 
 - chat gpt를 통한 추가적인 구성정보 -
