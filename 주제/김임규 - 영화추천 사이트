@@ -10,8 +10,10 @@
 1. : https://opendata.hira.or.kr/op/opc/selectOpenData.do?sno=12904&publDataTpCd=&searchCnd=&searchWrd=&pageIndex=1 : 질병 정보 서비스
 2. : https://www.data.go.kr/data/15089268/fileData.do : 건강보험 용어
 3. : https://www.data.go.kr/data/15001697/openapi.do : 병원코드정보 
-
-
+4. : https://www.data.go.kr/data/15001673/openapi.do : 약국정보 
+5. : https://www.data.go.kr/data/15001698/openapi.do#tab_layer_detail_function 병원정보
+6. : https://www.data.go.kr/tcs/dss/selectDataSetList.do?dType=FILE&keyword=&operator=AND&detailKeyword=&publicDataPk=&recmSe=&detailText=&relatedKeyword=&commaNotInData=&commaAndData=&commaOrData=&must_not=&tabId=&dataSetCoreTf=&coreDataNm=&sort=updtDt&relRadio=&orgFullName=건강보험심사평가원&orgFilter=건강보험심사평가원&org=건강보험심사평가원&orgSearch=&currentPage=1&perPage=10&brm=&instt=&svcType=&kwrdArray=&extsn=&coreDataNmArray=&pblonsipScopeCode=
+건강보험심평가원
 추천 기능
 1 환자 : 가까운 병원 예약 
 2 환자 : 고객센터 게시판 
