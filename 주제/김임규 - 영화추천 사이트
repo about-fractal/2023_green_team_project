@@ -15,14 +15,16 @@
 6. : https://www.data.go.kr/tcs/dss/selectDataSetList.do?dType=FILE&keyword=&operator=AND&detailKeyword=&publicDataPk=&recmSe=&detailText=&relatedKeyword=&commaNotInData=&commaAndData=&commaOrData=&must_not=&tabId=&dataSetCoreTf=&coreDataNm=&sort=updtDt&relRadio=&orgFullName=건강보험심사평가원&orgFilter=건강보험심사평가원&org=건강보험심사평가원&orgSearch=&currentPage=1&perPage=10&brm=&instt=&svcType=&kwrdArray=&extsn=&coreDataNmArray=&pblonsipScopeCode=
 건강보험심평가원
 추천 기능
+-- 로그인 기능 넣어 환자 와 관리자 페이지를 따로 만든다 
+
 1 환자 : 가까운 병원 예약 
 2 환자 : 고객센터 게시판 
 3 환자 : 질병백과 
+4 환자 : 의료진 및 진료과
 
 
 
-
-3 병원 : 의료진 및 진료과 
+3 병원 : 
 
 
 
