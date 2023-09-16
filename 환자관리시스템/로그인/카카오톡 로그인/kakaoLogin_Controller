@@ -1,0 +1,44 @@
+package com.green.medi.controller;
+
+import java.util.HashMap;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.green.medi.service.IKakaoLoginService;
+
+
+@Controller
+@RequestMapping(value = "/oauth")
+public class LoginController {
+	
+	@Autowired
+	public IKakaoLoginService ikakaoS;
+	
+	
+	
+	@RequestMapping(value = "/kakao", method = RequestMethod.GET )
+	public ModelAndView kakaoLogin(@RequestParam(value = "code", required = false)String code) throws Throwable {
+		
+		//code 받기
+		System.out.println("########" + code );
+		
+		// 2번  허용된 토큰 받고 
+		String access_Token  =  ikakaoS.getAccessToken(code);
+		System.out.println("###" + access_Token);
+		
+		
+		// 받기  // 현재 db 설정 하지않아 나오진 않습니다 참고 * ^-------^ * 
+		HashMap<String, Object> userInfo  =  ikakaoS.getUserInfo(access_Token);
+		System.out.println("###nickname#### : " + userInfo.get("nickname"));
+		System.out.println("###email#### : " + userInfo.get("email"));
+		
+		
+		return null; //테스트용이라 null 값 줬습니당 
+	}
+	
+}
