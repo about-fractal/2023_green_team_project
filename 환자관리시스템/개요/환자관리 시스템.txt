@@ -1,0 +1,163 @@
+CREATE TABLE Doctors
+(
+  doc_id        NUMBER(10) NOT NULL,
+  major_treat   VARCHAR2(25) NOT NULL,
+  doc_name      VARCHAR2(20) NOT NULL,
+  doc_gen       char(1)     NOT NULL,
+  doc_phone     VARCHAR2(15) NULL,
+  doc_email     VARCHAR2(50) UNIQUE,
+  doc_position  VARCHAR2(20) NOT NULL
+);
+ ALTER TABLE Doctors 
+  ADD CONSTRAINT doc_id_pk PRIMARY key(doc_id);
+
+
+CREATE TABLE Nurses -- 간호사
+(
+  nur_id        NUMBER(10) NOT NULL,
+  major_treat   VARCHAR2(25) NOT NULL,
+  nur_name      VARCHAR2(20) NOT NULL,
+  nur_gen       char(1)     NOT NULL,
+  nur_phone     VARCHAR2(15) NULL,
+  nur_email     VARCHAR2(50) UNIQUE,
+  nur_position  VARCHAR2(20) NOT NULL
+);
+
+ALTER TABLE Nurses
+ADD CONSTRAINT nur_id_pk PRIMARY key(nur_id);
+
+CREATE TABLE Patients -- 환자
+(
+  pat_id        NUMBER(10) NOT NULL,
+  nur_id        NUMBER(10) NOT NULL,
+  doc_id        NUMBER(10) NOT NULL,
+  pat_name      VARCHAR2(20) NOT NULL,
+  pat_gen       CHAR(1) NOT NULL,
+  pat_jumin     VARCHAR2(14) NOT NULL,
+  pat_addr      VARCHAR2(100) NOT NULL,
+  pat_phone     VARCHAR2(15) NULL,
+  pat_email     VARCHAR2(50) UNIQUE,
+  pat_job       VARCHAR2(20) NOT NULL  
+);
+
+ALTER TABLE Patients
+ADD CONSTRAINT pat_id_pk PRIMARY key(pat_id);
+
+ALTER TABLE Patients
+ADD CONSTRAINT R_2 FOREIGN KEY(doc_id)
+                   REFERENCES Doctors(doc_id);
+                   
+ALTER TABLE Patients
+ADD CONSTRAINT R_3 FOREIGN KEY(nur_id)
+                   REFERENCES Nurses(nur_id);
+                   
+CREATE TABLE Treatments -- 진료기록
+(
+  treat_id        NUMBER(15) NOT NULL,
+  pat_id          NUMBER(10) NOT NULL,
+  doc_id          NUMBER(10) NOT NULL,
+  treat_contents  VARCHAR2(1000) NOT NULL,
+  treat_date      DATE NOT NULL
+);
+
+ALTER TABLE Treatments
+ADD CONSTRAINT treat_id_pk PRIMARY key(treat_id, pat_id, doc_id);
+
+ALTER TABLE Treatments
+ADD CONSTRAINT R_5 FOREIGN KEY(pat_id)
+                   REFERENCES Patients(pat_id);
+
+ALTER TABLE Treatments
+ADD CONSTRAINT R_6 FOREIGN KEY(doc_id)
+                   REFERENCES Doctors(doc_id);
+
+CREATE TABLE Charts
+(
+  chart_id      VARCHAR2(20) NOT NULL,
+  treat_id      NUMBER(15) NOT NULL,
+  doc_id        NUMBER(10) NOT NULL,
+  pat_id        NUMBER(10) NOT NULL,
+  nur_id        NUMBER(10) NOT NULL,
+  chart_content VARCHAR2(1000) NOT NULL
+);
+
+ALTER TABLE Charts
+ADD CONSTRAINT chart_treat_doc_pat_id_pk PRIMARY key(chart_id, treat_id, doc_id, pat_id);
+
+ALTER TABLE Charts
+ADD CONSTRAINT R_4 FOREIGN KEY(nur_id)
+                   REFERENCES Nurses(nur_id);
+
+ALTER TABLE Charts
+ADD CONSTRAINT R_7 FOREIGN KEY(treat_id, pat_id, doc_id)
+                   REFERENCES Treatments(treat_id, pat_id, doc_id);
+   
+---- 값 삽입
+--의사 
+insert into DOCTORS(doc_id, major_treat, doc_name, doc_gen, doc_phone, doc_email, doc_position)
+values (21428001, '소아과', '이광수', 'M', '010-1123-1234', 'lee1@gmail.com','과장');
+insert into DOCTORS(doc_id, major_treat, doc_name, doc_gen, doc_phone, doc_email, doc_position)
+values (21428023, '소아과', '양세찬', 'M', '010-2323-1235', 'yang@gmail.com','전문의');
+insert into DOCTORS(doc_id, major_treat, doc_name, doc_gen, doc_phone, doc_email, doc_position)
+values (21521111, '내과', '유재석', 'M', '010-1323-1442', 'you@gmail.com','과장');
+delete from DOCTORS where DOC_NAME='유재석';
+select * from doctors;
+
+--간호사
+
+INSERT INTO Nurses(nur_id, major_treat, nur_name, nur_gen, nur_phone, nur_email, nur_position)
+VALUES (111001, '소아과', '송지효', 'F', '010-5455-8751', 'song@gmail.com', '수간호사');
+
+INSERT INTO Nurses(nur_id, major_treat, nur_name, nur_gen, nur_phone, nur_email, nur_position)
+VALUES (111002, '소아과', '전소민', 'F', '010-3333-2313', 'somin@gmail.com', '주임');
+
+INSERT INTO Nurses(nur_id, major_treat, nur_name, nur_gen, nur_phone, nur_email, nur_position)
+VALUES (112001, '내과', '김종국', 'M', '010-7777-1234', 'kim@gmail.com', '간호사');
+
+-- 환자
+INSERT INTO Patients(pat_id, nur_id, doc_id, pat_name, pat_gen, pat_jumin, pat_addr, pat_phone, pat_email,pat_job)
+VALUES(1001,   111001,   21428001,   '지석진',   'M',   690408,   '수원',   010-5555-4342,   'suk@aa.com',   '회사원');
+
+INSERT INTO Patients(pat_id, nur_id, doc_id, pat_name, pat_gen, pat_jumin, pat_addr, pat_phone, pat_email,pat_job)
+VALUES(1002,   111002,   21428023,   '백진희',   'F',   880108,   '서울',   010-8188-4535,   'bak@ab.com',   '회사원');
+
+INSERT INTO Patients(pat_id, nur_id, doc_id, pat_name, pat_gen, pat_jumin, pat_addr, pat_phone, pat_email,pat_job)
+VALUES(1003,   112001,   21521111,   '홍진영',   'F',   950816,   '속초',   010-9919-1234,   'hong@ac.com',   '학생');
+
+commit;
+
+-- 진료
+INSERT INTO Treatments(treat_id,pat_id, doc_id, treat_contents, treat_date)
+VALUES (110022, 1001, 21428001, '허리디스크', '13/12/18');
+INSERT INTO Treatments(treat_id,pat_id, doc_id, treat_contents, treat_date)
+VALUES (110022, 1002, 21428023, '무릎 관절염', '13/12/18');
+INSERT INTO Treatments(treat_id,pat_id, doc_id, treat_contents, treat_date)
+VALUES (120011, 1003, 21521111, '감기 몸살', '13/12/24');
+commit;
+
+-- 진료차트
+INSERT INTO Charts(chart_id, treat_id, doc_id, pat_id, nur_id, chart_content)
+VALUES ('a_20131212', 110022, 21428001, 1001, 111001, '허리 물리치료 및 진통제 처방');
+
+INSERT INTO Charts(chart_id, treat_id, doc_id, pat_id, nur_id, chart_content)
+VALUES ('b_20131111', 110022, 21428023, 1002, 111002, '무릎 물리치료');
+
+INSERT INTO Charts(chart_id, treat_id, doc_id, pat_id, nur_id, chart_content)
+VALUES ('c_20131023', 120011, 21521111, 1003, 112001, '약 처방');
+
+commit;
+-- 
+desc doctors;
+desc nurse;
+desc patients;
+desc treatments;
+
+select * from doctors;
+select * from NURSES;
+select * from Patients;
+select * from Treatments;
+select * from charts;
+
+
+
+commit;
