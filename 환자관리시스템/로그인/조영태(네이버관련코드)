@@ -134,11 +134,29 @@ JSP
   %>
   </body>
 </html>
+-------------------------------------------------------------------
+CREATE TABLE "MEMBERS" (
+    "MEMBER_ID" NUMBER GENERATED ALWAYS AS IDENTITY,
+    "MEMBER_NAME" VARCHAR2(100) COMMENT '회원이름',
+    "CONTACT_NUMBER" VARCHAR2(20) COMMENT '연락처',
+    "EMAIL_ADDRESS" VARCHAR2(100) COMMENT '이메일 주소',
+    "NICKNAME" VARCHAR2(50) COMMENT '별명',
+    "PROFILE_PICTURE" BLOB COMMENT '프로필 사진',
+    "GENDER" CHAR(1) COMMENT '성별',
+    "BIRTHDAY" DATE COMMENT '생일',
+    "AGE_GROUP" NUMBER COMMENT '연령대',
+    "BIRTH_YEAR" NUMBER COMMENT '출생연도',
+    "MOBILE_NUMBER" VARCHAR2(20)  COMMENT '휴대전화번호',
 
+PRIMARY KEY ("MEMBER_ID")
+); 컨트롤러랑 나머지 만들어야함 구상중.
 --------------------------------------------------------------------
 관련 주소
 1. https://developers.naver.com/docs/login/web/web.md
 2. https://tyrannocoding.tistory.com/60
+3. https://llshl.tistory.com/6
+4. https://velog.io/@jaeygun/Spring-boot-Naver-Login-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0feat.-Thymeleaf
+5. https://cobook.tistory.com/31
 --------------------------------------------
 네이버 디벨롭 링크
 https://developers.naver.com/apps/#/myapps/zDV7rLiBgqp3AXeRLWN9/config
