@@ -137,19 +137,31 @@ JSP
 -------------------------------------------------------------------
 CREATE TABLE "MEMBERS" (
     "MEMBER_ID" NUMBER GENERATED ALWAYS AS IDENTITY,
-    "MEMBER_NAME" VARCHAR2(100) COMMENT '회원이름',
-    "CONTACT_NUMBER" VARCHAR2(20) COMMENT '연락처',
-    "EMAIL_ADDRESS" VARCHAR2(100) COMMENT '이메일 주소',
-    "NICKNAME" VARCHAR2(50) COMMENT '별명',
-    "PROFILE_PICTURE" BLOB COMMENT '프로필 사진',
-    "GENDER" CHAR(1) COMMENT '성별',
-    "BIRTHDAY" DATE COMMENT '생일',
-    "AGE_GROUP" NUMBER COMMENT '연령대',
-    "BIRTH_YEAR" NUMBER COMMENT '출생연도',
-    "MOBILE_NUMBER" VARCHAR2(20)  COMMENT '휴대전화번호',
+    "MEMBER_NAME" VARCHAR2(100),
+    "CONTACT_NUMBER" VARCHAR2(20),
+    "EMAIL_ADDRESS" VARCHAR2(100),
+    "NICKNAME" VARCHAR2(50),
+    "PROFILE_PICTURE" BLOB,
+    "GENDER" CHAR(1),
+    "BIRTHDAY" DATE,
+    "AGE_GROUP" NUMBER,
+    "BIRTH_YEAR" NUMBER,
+    "MOBILE_NUMBER" VARCHAR2(20),
 
 PRIMARY KEY ("MEMBER_ID")
-); 컨트롤러랑 나머지 만들어야함 구상중.
+);
+
+회원이름		
+연락처 이메일 주소		
+별명		
+프로필 사진		
+성별		
+생일		
+연령대		
+출생연도		
+휴대전화번호
+
+컨트롤러랑 나머지 만들어야함 구상중.
 --------------------------------------------------------------------
 관련 주소
 1. https://developers.naver.com/docs/login/web/web.md
