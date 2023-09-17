@@ -135,6 +135,144 @@ JSP
   </body>
 </html>
 -------------------------------------------------------------------
+package com.naver.vo;
+
+public class NaverVo {
+	
+	    private String n_age;
+	    private String n_birthday;
+	    private String n_email;
+	    private String n_gender;
+	    private String n_id;
+	    private String n_name;
+	    private String n_nickName;
+		public NaverVo() {}
+	    public NaverVo(String n_age, String n_birthday, String n_email, String n_gender, String n_id, String n_name,
+				String n_nickName) {
+			this.n_age = n_age;
+			this.n_birthday = n_birthday;
+			this.n_email = n_email;
+			this.n_gender = n_gender;
+			this.n_id = n_id;
+			this.n_name = n_name;
+			this.n_nickName = n_nickName;
+		}
+		public String getN_age() {
+			return n_age;
+		}
+		public void setN_age(String n_age) {
+			this.n_age = n_age;
+		}
+		public String getN_birthday() {
+			return n_birthday;
+		}
+		public void setN_birthday(String n_birthday) {
+			this.n_birthday = n_birthday;
+		}
+		public String getN_email() {
+			return n_email;
+		}
+		public void setN_email(String n_email) {
+			this.n_email = n_email;
+		}
+		public String getN_gender() {
+			return n_gender;
+		}
+		public void setN_gender(String n_gender) {
+			this.n_gender = n_gender;
+		}
+		public String getN_id() {
+			return n_id;
+		}
+		public void setN_id(String n_id) {
+			this.n_id = n_id;
+		}
+		public String getN_name() {
+			return n_name;
+		}
+		public void setN_name(String n_name) {
+			this.n_name = n_name;
+		}
+		public String getN_nickName() {
+			return n_nickName;
+		}
+		public void setN_nickName(String n_nickName) {
+			this.n_nickName = n_nickName;
+		}
+		@Override
+		public String toString() {
+			return "NaverVo [n_age=" + n_age + ", n_birthday=" + n_birthday + ", n_email=" + n_email + ", n_gender="
+					+ n_gender + ", n_id=" + n_id + ", n_name=" + n_name + ", n_nickName=" + n_nickName + "]";
+		}
+	    
+	    
+}
+------------------------------------------------------------------
+package com.green.user;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.naver.vo.NaverVo;
+
+@Controller
+public class UserController {
+	
+	@RequestMapping("/")
+    public String naver() {
+        return "naverlogin";
+    }
+    
+    
+    @RequestMapping(value="/naver", method=RequestMethod.GET)
+    public String callBack(){
+        return "callback";
+    }
+    
+    @RequestMapping(value="naverSave", method=RequestMethod.POST)
+    public @ResponseBody String naverSave(
+    		@RequestParam("n_age") String n_age,
+    		@RequestParam("n_birthday") String n_birthday, @RequestParam("n_email") String n_email,
+    		@RequestParam("n_gender") String n_gender, @RequestParam("n_id") String n_id,
+    		@RequestParam("n_name") String n_name, @RequestParam("n_nickName") String n_nickName) {
+    
+    System.out.println("#############################################");
+    System.out.println(n_age);
+    System.out.println(n_birthday);
+    System.out.println(n_email);
+    System.out.println(n_gender);
+    System.out.println(n_id);
+    System.out.println(n_name);
+    System.out.println(n_nickName);
+    System.out.println("#############################################");
+ 
+    NaverVo naver = new NaverVo();
+    naver.setN_age(n_age);
+    naver.setN_birthday(n_birthday);
+    naver.setN_email(n_email);
+    naver.setN_gender(n_gender);
+    naver.setN_id(n_id);
+    naver.setN_name(n_name);
+    naver.setN_nickName(n_nickName);
+    
+    
+    System.out.println("zzzzz =" +naver.getN_age());
+ 
+    String result = "no";
+    
+    if(naver!=null) {
+        result = "ok";
+    }
+ 
+    return result;
+    
+    }
+
+}
+-------------------------------------------------------------------
 CREATE TABLE "MEMBERS" (
     "MEMBER_ID" NUMBER GENERATED ALWAYS AS IDENTITY,
     "MEMBER_NAME" VARCHAR2(100),
@@ -161,7 +299,7 @@ PRIMARY KEY ("MEMBER_ID")
 출생연도		
 휴대전화번호
 
-컨트롤러랑 나머지 만들어야함 구상중.
+ 구상중.
 --------------------------------------------------------------------
 관련 주소
 1. https://developers.naver.com/docs/login/web/web.md
